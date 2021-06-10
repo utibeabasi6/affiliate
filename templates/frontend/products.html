@@ -1,0 +1,96 @@
+{%extends 'frontend/base.html'%}
+{%block nav%}<ul class="navbar-nav ml-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="{%url 'home'%}">Home
+      <span class="sr-only">(current)</span>
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link active" href="{%url 'products'%}">Products</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{%url 'about'%}">About Me</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{%url 'contact'%}"">Contact Me</a>
+    </li>
+  </ul>{%endblock%}
+    <!-- Page Content -->
+    {%block content%}
+    {%load static%}
+    <div class=" page-heading products-heading header-text">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="text-content">
+              <h4>new arrivals</h4>
+              <h2>Utibeabasi's store</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+
+
+      <div class="products">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="filters">
+                <ul>
+                  <li class="active" data-filter="*">All Products</li>
+                  <li data-filter=".des">Men</li>
+                  <li data-filter=".dev">Women</li>
+                  <li data-filter=".gra">Tech & stuff</li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="filters-content">
+                <div class="row grid">
+                  {%for product in products%}
+                  <div class="col-lg-4 col-md-4 all {{product.tag}}">
+                    <div class="product-item">
+                      <a href="{{product.link}}"><img src="{{product.image}}" alt=""></a>
+                      <div class="down-content">
+                        <div class="d-block p-0 col-10 text-left"> <a href="{{product.link}}">
+                          <h4>{{product.name}}</h4>
+                        </a></div>
+                        {%if product.price > 1 %}<h6>${{product.price}}</h6>{%endif%}
+                        <p>{{product.description}}</p>
+                        
+                      </div>
+                    </div>
+                  </div>
+                  {%endfor%}
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <ul class="pages">
+                {% if products.has_previous %}
+                <li><a href="?page={{ products.previous_page_number }}"><i class="fa fa-angle-double-left"></i></a></li>
+                {% else %}
+                <li class="disabled"><i class="fa fa-angle-double-left"></i></li>
+                {% endif %}
+                {% for i in products.paginator.page_range %}
+                {% if products.number == i %}
+                <li class="active"><a href="?page={{i}}">{{i}}</a></li>
+                {% else %}
+                <li><a href="?page={{i}}">{{i}}</a></li>
+                {% endif %}
+                {% endfor %}
+                {% if products.has_next %}
+
+                <li><a href="?page={{ products.next_page_number }}"><i class="fa fa-angle-double-right"></i></a></li>
+                {% else %}
+                <li class="disabled"><i
+                      class="fa fa-angle-double-right"></i></li>
+                {% endif %}
+
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      {%endblock content%}

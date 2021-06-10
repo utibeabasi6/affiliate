@@ -1,0 +1,147 @@
+{%extends 'frontend/base.html'%}
+{%block nav%}<ul class="navbar-nav ml-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="{%url 'home'%}">Home
+      <span class="sr-only">(current)</span>
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link " href="{%url 'products'%}">Products</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link active" href="{%url 'about'%}">About Me</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{%url 'contact'%}"">Contact Me</a>
+    </li>
+  </ul>{%endblock%}
+    <!-- Page Content -->
+    {%block content%}
+    {%load static%}
+
+    <!-- Page Content -->
+    <div class=" page-heading about-heading header-text">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="text-content">
+              <h4>about me</h4>
+              <h2>my store</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+
+
+      <div class="best-features about-features">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="section-heading">
+                <h2>Our Background</h2>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="right-image">
+                <img src="{% static 'assets/images/feature-image.jpg' %}" alt="">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="left-content">
+                <h4>Who am I &amp; What I do?</h4>
+                <p>Hey again, I'm Utibeabasi Umanah, a fullstack developer. That basically means that I work on both the
+                  client-side and server-side of websites, apps etc (though i prefer the server-side ).
+                  Also, I'm a tech enthusiast, love coding and all that stuff and I'm looking forward to working in
+                  Google :)
+                </p>
+                <ul class="social-icons">
+                  <li><a href="https://www.linkedin.com/in/utibeabasiumanah-8696971b7/"><i
+                        class="fa fa-linkedin"></i></a></li>
+                  <li><a href="http://github.com/utibeabasi6"><i class="fa fa-github"></i></a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="team-members">
+        <div class="container">
+          <div class="row">
+
+            <div class="col-md-12">
+              <div class="section-heading">
+                <h2>My Team Members</h2>
+              </div>
+            </div>
+            {% for member in team_members%}
+            <div class="col-md-4">
+              <div class="team-member">
+                <div class="thumb-container">
+                  <img src="/media/{{member.image}}" alt="">
+                  <div class="hover-effect">
+                    <div class="hover-content">
+                      <ul class="social-icons">
+                        <li><a href="{{member.linked_in_url}}"><i class="fa fa-linkedin"></i></a></li>
+                        <li><a href="{{member.github_url}}"><i class="fa fa-github"></i></a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div class="down-content">
+                  <h4>{{member.name}}</h4>
+                  <span>{{member.position}}</span>
+                  <p>{{member.description}}</p>
+                </div>
+              </div>
+            </div>{%endfor%}
+          </div>
+        </div>
+      </div>
+      </div>
+
+
+      <div class="services">
+        <div class="container">
+          <div class="row">
+            {%for skill in skills%}
+            <div class="col-md-4">
+              <div class="service-item">
+                <div class="icon">
+                  <i class="fa fa-{{skill.icon}}"></i>
+                </div>
+                <div class="down-content">
+                  <h4>{{skill.name}}</h4>
+                  <p>{{skill.descriprion}}</p>
+                  <a href="{{skill.link}}" class="filled-button">Read More</a>
+                </div>
+              </div>
+            </div>{%endfor%}
+            
+          </div>
+        </div>
+      </div>
+
+
+      <div class="happy-clients">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="section-heading">
+                <h2>Happy Partners</h2>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="owl-clients owl-carousel">
+                {% for partner in partners%}
+                <div class="client-item">
+                  <img src="/media/{{partner.logo}}" alt="1">
+                </div>{%endfor%}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {%endblock%}
